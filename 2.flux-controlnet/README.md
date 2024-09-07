@@ -23,5 +23,5 @@ python infer.py
 
 ## 结果示例
 
-![demo](https://github.com/yishaoai/tutorials-of-100-wonderful-ai-models/tree/main/assets/flux-controlnet.png)
+![demo](https://raw.githubusercontent.com/yishaoai/tutorials-of-100-wonderful-ai-models/main/2.flux-controlnet/assets/flux-controlnet.png)
 
