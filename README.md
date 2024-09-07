@@ -6,7 +6,7 @@
 
 本文档关注AI技术的实践，以简单的方式介绍如何快速入门前沿的精品AI模型，帮助大家可以快速地掌握和使用新的AI技术。
 
-更详细的教程文本请参考[飞书链接](https://o0pv1804vpu.feishu.cn/docx/Wi1ndh3XboSn3TxV3qAcgqjhnGc?from=from_copylink)
+更详细的技术分享文档请参考[飞书链接](https://o0pv1804vpu.feishu.cn/docx/Wi1ndh3XboSn3TxV3qAcgqjhnGc?from=from_copylink)
 
 
 联系方式：
