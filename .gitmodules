@@ -1,3 +1,9 @@
 [submodule "1.flux-lora-finetune/x-flux"]
 	path = 1.flux-lora-finetune/x-flux
 	url = https://github.com/XLabs-AI/x-flux
+[submodule "1.flux-lora-finetune/diffusers"]
+	path = 1.flux-lora-finetune/diffusers
+	url = https://github.com/huggingface/diffusers
+[submodule "2.flux-controlnet/diffusers"]
+	path = 2.flux-controlnet/diffusers
+	url = https://github.com/PromeAIpro/diffusers
