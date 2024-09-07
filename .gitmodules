@@ -7,3 +7,6 @@
 [submodule "2.flux-controlnet/diffusers"]
 	path = 2.flux-controlnet/diffusers
 	url = https://github.com/PromeAIpro/diffusers
+[submodule "3.flux-controlnet-inpaint/diffusers"]
+	path = 3.flux-controlnet-inpaint/diffusers
+	url = https://github.com/yishaoai/flux-controlnet-inpaint
