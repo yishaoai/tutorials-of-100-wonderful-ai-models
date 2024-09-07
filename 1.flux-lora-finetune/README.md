@@ -1,7 +1,7 @@
 ## 1. 童装lora的效果展示
 本部分以182张童装数据作为训练数据，训练flux.1 模型的lora，生成的图片适合买家秀和商品种草场景，从以下的图片可以看出，生成的图片非常真实且质量很高。本部分实验仅为了进行效果展示，如果训练图片数量更多，质量更高，将会获得更好的生成结果。本部分实验的效果展示如下：
 
-![kid-clothes-lora](https://github.com/yishaoai/tutorials-of-100-wonderful-ai-models/tree/main/1.flux-lora-finetune/assets/kid-clothes-lora.png)
+![kid-clothes-lora](https://raw.githubusercontent.com/yishaoai/tutorials-of-100-wonderful-ai-models/main/1.flux-lora-finetune/assets/kid-clothes-lora.png)
 
 ## 2. Flux.1 的lora微调实验
 
