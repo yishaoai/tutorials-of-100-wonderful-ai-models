@@ -10,6 +10,4 @@
 
 
 联系方式：
-![二维码]([https://github.com/yishaoai/tutorials-of-100-wonderful-ai-models/assets/qrcode.jpeg](https://github.com/yishaoai/tutorials-of-100-wonderful-ai-models/blob/main/assets/qrcode.jpeg?raw=true))
-
-
+![二维码](https://raw.githubusercontent.com/yishaoai/tutorials-of-100-wonderful-ai-models/main/assets/qrcode.jpeg)
