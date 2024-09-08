@@ -37,59 +37,61 @@ def get_mask(image, processor, model):
     mask = (255 - mask*255).numpy().astype(np.uint8)
     return mask
 
-canny = CannyDetector()
-cloth_processor = SegformerImageProcessor.from_pretrained("mattmdjaga/segformer_b2_clothes")
-cloth_model = AutoModelForSemanticSegmentation.from_pretrained("mattmdjaga/segformer_b2_clothes")
 
-
-
-
-base_model = 'black-forest-labs/FLUX.1-dev'
-controlnet_model = 'YishaoAI/flux-dev-controlnet-canny-kid-clothes'
-
-controlnet = FluxControlNetModel.from_pretrained(controlnet_model, torch_dtype=torch.bfloat16)
-
-
-pipe = FluxControlNetInpaintPipeline.from_pretrained(base_model, controlnet=controlnet, torch_dtype=torch.bfloat16)
-pipe.enable_model_cpu_offload() #save some VRAM by offloading the model to CPU. Remove this if you have enough GPU power
-#pipe.load_lora_weights("/data/lora.safetensors")
-pipe.to("cuda")
-
-
-
-
-image_path = "3.png"
-prompt = "children's clothing model"
-save_dir = "./save_dir"
-os.makedirs(save_dir, exist_ok=True)
-mask_path = os.path.join(save_dir, Path(image_path).stem + "_mask.png")
-
-image = load_image(image_path)
-mask = get_mask(image, cloth_processor, cloth_model)
-cv2.imwrite(mask_path, cv2.merge([mask, mask, mask]))
-mask = load_image(mask_path)
-#mask = Image.fromarray(cv2.merge([mask, mask, mask]))
-canny_image = canny(image)
-
-for scale in range(9, 10):
-    scale = scale * 0.1
-    for seed in range(10, 100):
-        import random
-        prompt = prompt + ", indoor" if random.uniform(0,1)<0.5 else prompt + ", outdoor"
-        generator = torch.Generator(device="cpu").manual_seed(seed)
-        image_res = pipe(
-                prompt,
-                image=image,
-                control_image=canny_image,
-                controlnet_conditioning_scale=0.5,
-                mask_image=mask,
-                strength=0.95,
-                num_inference_steps=50,
-                guidance_scale=5,
-                generator=generator,
-                joint_attention_kwargs={"scale": scale},
-                ).images[0]
-
-        save_path = os.path.join(save_dir, Path(image_path).stem + f"_{scale}_res_{seed}.png")
-        image_res.resize(image.size).save(save_path)
-
+if __name__ == "__main__":
+    canny = CannyDetector()
+    cloth_processor = SegformerImageProcessor.from_pretrained("mattmdjaga/segformer_b2_clothes")
+    cloth_model = AutoModelForSemanticSegmentation.from_pretrained("mattmdjaga/segformer_b2_clothes")
+    
+    
+    
+    
+    base_model = 'black-forest-labs/FLUX.1-dev'
+    controlnet_model = 'YishaoAI/flux-dev-controlnet-canny-kid-clothes'
+    
+    controlnet = FluxControlNetModel.from_pretrained(controlnet_model, torch_dtype=torch.bfloat16)
+    
+    
+    pipe = FluxControlNetInpaintPipeline.from_pretrained(base_model, controlnet=controlnet, torch_dtype=torch.bfloat16)
+    pipe.enable_model_cpu_offload() #save some VRAM by offloading the model to CPU. Remove this if you have enough GPU power
+    #pipe.load_lora_weights("/data/lora.safetensors")
+    pipe.to("cuda")
+    
+    
+    
+    
+    image_path = "3.png"
+    prompt = "children's clothing model"
+    save_dir = "./save_dir"
+    os.makedirs(save_dir, exist_ok=True)
+    mask_path = os.path.join(save_dir, Path(image_path).stem + "_mask.png")
+    
+    image = load_image(image_path)
+    mask = get_mask(image, cloth_processor, cloth_model)
+    cv2.imwrite(mask_path, cv2.merge([mask, mask, mask]))
+    mask = load_image(mask_path)
+    #mask = Image.fromarray(cv2.merge([mask, mask, mask]))
+    canny_image = canny(image)
+    
+    for scale in range(9, 10):
+        scale = scale * 0.1
+        for seed in range(10, 100):
+            import random
+            prompt = prompt + ", indoor" if random.uniform(0,1)<0.5 else prompt + ", outdoor"
+            generator = torch.Generator(device="cpu").manual_seed(seed)
+            image_res = pipe(
+                    prompt,
+                    image=image,
+                    control_image=canny_image,
+                    controlnet_conditioning_scale=0.5,
+                    mask_image=mask,
+                    strength=0.95,
+                    num_inference_steps=50,
+                    guidance_scale=5,
+                    generator=generator,
+                    joint_attention_kwargs={"scale": scale},
+                    ).images[0]
+    
+            save_path = os.path.join(save_dir, Path(image_path).stem + f"_{scale}_res_{seed}.png")
+            image_res.resize(image.size).save(save_path)
+    
